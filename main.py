@@ -88,39 +88,3 @@ if __name__ == "__main__":
     json_object = json.dumps(answer_1)
     with open("results/answer1.json", "w") as outfile:
         outfile.write(json_object)
-
-    # =================== TASK 1 ===================
-    # top_trending_videos_df = find.top_trending_videos(videos_df, limit=10)
-    # print("=" * 12, "TASK 1", "=" * 12)
-    # top_trending_videos_df.printSchema()
-    # top_trending_videos_df.show()
-    #
-    # # =================== TASK 2 ===================
-    # week_top_categories_df = find.top_week_categories(videos_df, categories_df)
-    # print("=" * 12, "TASK 2", "=" * 12)
-    # week_top_categories_df.printSchema()
-    # week_top_categories_df.show()
-    #
-    # # =================== TASK 3 ===================
-    # top_tags_monthly_df = find.top_tags_monthly(videos_df)
-    # print("=" * 12, "TASK 3", "=" * 12)
-    # top_tags_monthly_df.printSchema()
-    # top_tags_monthly_df.show()
-    #
-    # # =================== TASK 4 ===================
-    # top_channels_df = find.top_channels(videos_df)
-    # print("=" * 12, "TASK 4", "=" * 12)
-    # top_channels_df.printSchema()
-    # top_channels_df.show()
-    #
-    # # =================== TASK 5 ===================
-    # top_trending_channels_df = find.top_trending_channels(videos_df)
-    # print("=" * 12, "TASK 5", "=" * 12)
-    # top_trending_channels_df.printSchema()
-    # top_trending_channels_df.show()
-    #
-    # # =================== TASK 6 ===================
-    # top_category_videos_df = find.top_category_videos(videos_df, categories_df)
-    # print("=" * 12, "TASK 6", "=" * 12)
-    # top_category_videos_df.printSchema()
-    # top_category_videos_df.show()
