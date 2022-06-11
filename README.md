@@ -13,3 +13,8 @@ Order of running
 > 
 > spark-submit --master local[*] --deploy-mode client main.py
 
+first query
+
+![image](https://user-images.githubusercontent.com/102665740/173187407-0c0d9c19-f1a7-4f09-a574-423ff76d12cb.png)
+
+
