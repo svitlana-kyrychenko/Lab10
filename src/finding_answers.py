@@ -138,14 +138,14 @@ def top_week_categories(videos_df, categories_df, spark):
     result.show()
 
     result_row = result.collect()
-    weeks = [[{"start_date": ele.__getattr__("start_date"), "end_date": ele.__getattr__("end_date"),
-                      "category_id": ele.__getattr__("category_id"), "category_name": ele.__getattr__("title"),
-                      "number_of_videos": ele.__getattr__("num_videos"), "total_views": ele.__getattr__("num_of_views"),
-                      "video_ids": get_videos_by_category(ele.__getattr__("category_id"), ele.__getattr__("start_date"), ele.__getattr__("end_date"), spark)}] for ele in result_row]
-    print("here")
-    answer_2 = {"weeks": weeks}
-
-    json_object = json.dumps(answer_2)
+    #weeks = [[{"start_date": ele.__getattr__("start_date"), "end_date": ele.__getattr__("end_date"),
+    #                  "category_id": ele.__getattr__("category_id"), "category_name": ele.__getattr__("title"),
+    #                  "number_of_videos": ele.__getattr__("num_videos"), "total_views": ele.__getattr__("num_of_views"),
+    #                  "video_ids": get_videos_by_category(ele.__getattr__("category_id"), ele.__getattr__("start_date"), ele.__getattr__("end_date"), spark)}] for ele in result_row]
+    #print("here")
+    #answer_2 = {"weeks": weeks}
+    #
+    #json_object = json.dumps(answer_2)
 
     print("2 Query END ////////////////////////////////////////////////////////////////////\n\n\n")
     with open("results/answer2.json", "w") as outfile:
@@ -269,7 +269,7 @@ def top_trending_channels(videos_df, spark):
 
 def top_category_videos(videos_df, categories_df, spark):
     max_video_view = spark.sql(
-        "SELECT * as num_views FROM global_temp.video WHERE views >= 100000;")
+        "SELECT * FROM global_temp.video WHERE views >= 100000;")
     max_video_view.show()
     max_video_view.createGlobalTempView("max_video_view")
 
@@ -296,8 +296,7 @@ def top_category_videos(videos_df, categories_df, spark):
     videos_ratio.createGlobalTempView("videos_ratio")
 
     videos_ratio_best = spark.sql(
-        "SELECT * FROM (SELECT *, row_number() over(partition by category_id, video_id order by ratio_likes_dislikes desc) as seqnum FROM global_temp.tags_popular) WHERE seqnum <= 10;")
+        "SELECT * FROM (SELECT *, row_number() over(partition by category_id, video_id order by ratio_likes_dislikes desc) as seqnum FROM global_temp.videos_ratio) WHERE seqnum <= 10;")
     videos_ratio_best.show()
     videos_ratio_best.createGlobalTempView("videos_ratio_best")
     print("6 Query END ////////////////////////////////////////////////////////////////////\n\n\n")
-
