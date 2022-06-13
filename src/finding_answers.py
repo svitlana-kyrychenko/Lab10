@@ -71,11 +71,12 @@ def get_week_boundaries(date):
     week_num = date_dt.strftime("%y%W")
     return start, end, week_num
 
-def get_videos_by_category(category, spark):
+def get_videos_by_category(category, start_date, end_date, spark):
     videos_by_category = spark.sql(
-        "SELECT category_id FROM global_temp.video WHERE category_id = " + category + " ;")
+        "SELECT DISTINCT video_id FROM global_temp.video WHERE category_id = \"" + category + "\"  AND trending_date >= "+ start_date+ " AND trending_date <= " + end_date +";")
     videos_by_category_row = videos_by_category.collect()
-    return [[ele.__getattr__("category_id")] for ele in videos_by_category_row]
+
+    return [[ele.__getattr__("video_id")] for ele in videos_by_category_row]
 
 def top_week_categories(videos_df, categories_df, spark):
     weeks_df = spark.sql(
@@ -140,7 +141,8 @@ def top_week_categories(videos_df, categories_df, spark):
     weeks = [[{"start_date": ele.__getattr__("start_date"), "end_date": ele.__getattr__("end_date"),
                       "category_id": ele.__getattr__("category_id"), "category_name": ele.__getattr__("title"),
                       "number_of_videos": ele.__getattr__("num_videos"), "total_views": ele.__getattr__("num_of_views"),
-                      "video_ids": get_videos_by_category(ele.__getattr__("category_id"), spark)}] for ele in result_row]
+                      "video_ids": get_videos_by_category(ele.__getattr__("category_id"), ele.__getattr__("start_date"), ele.__getattr__("end_date"), spark)}] for ele in result_row]
+    print("here")
     answer_2 = {"weeks": weeks}
 
     json_object = json.dumps(answer_2)
@@ -264,8 +266,6 @@ def top_trending_channels(videos_df, spark):
 
     print("5 Query END ////////////////////////////////////////////////////////////////////\n\n\n")
 
-
-# ======================== TASK 6 ========================
 
 def top_category_videos(videos_df, categories_df, spark):
     max_video_view = spark.sql(
