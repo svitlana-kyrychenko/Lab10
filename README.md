@@ -23,8 +23,16 @@ second query
 
 third query
 
+![image](https://user-images.githubusercontent.com/102665740/173283201-ef6bab96-548c-4fd3-aa9e-4a19a170b9d1.png)
+
 fourth query
+
+![image](https://user-images.githubusercontent.com/102665740/173283287-da90b553-c438-48ad-af49-4102029c5615.png)
 
 fifth query
 
+![image](https://user-images.githubusercontent.com/102665740/173283359-88472d34-e304-402f-8ebb-1ecd05e266be.png)
+
 sixth query
+
+![image](https://user-images.githubusercontent.com/102665740/173283903-1fa81525-0a94-4938-8237-708e5297071b.png)
